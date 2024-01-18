@@ -1,4 +1,4 @@
-Simple Pokédex project using https://pokeapi.co
+Simple Angular Pokédex project using https://pokeapi.co
 
 # MyPokemans
 
