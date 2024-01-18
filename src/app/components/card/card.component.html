@@ -1,0 +1,29 @@
+<div class="card my-3">
+  <img
+    class="card-img-top"
+    src="{{ imgUrl }}"
+    alt="
+  {{ pokemon.name | titlecase }}"
+  />
+  <div class="card-body">
+    <h5 class="card-title d-flex justify-content-center">
+      <span class="badge badge-info mr-1">#{{ pokemon.id }}</span>
+       {{ pokemon.name | titlecase }}
+    </h5>
+    <span *ngFor="let type of types">
+      <span
+        class="type badge"
+        [ngClass]="{
+          'badge-success': type.type.name === 'grass',
+          'badge-danger': type.type.name === 'fire',
+          'badge-primary': type.type.name === 'water',
+          'badge-warning': type.type.name === 'electric',
+          'badge-info': type.type.name === 'normal',
+          'badge-dark': type.type.name === 'poison',
+          'badge-secondary': type.type.name === 'rock'
+        }"
+        >{{ type.type.name }}</span
+      >
+    </span>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container my-5">
+  <h1>My Pokédex</h1>
+  <hr />
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search your pokémon..."
+    (input)="filter($event)"
+  />
+
+  <div class="row">
+    <div class="col-xl-4 col-sm-6 col-xs-12" *ngFor="let pokemon of pokemons">
+      <app-card [pokemon]="pokemon"></app-card>
+    </div>
+  </div>
+</div>
