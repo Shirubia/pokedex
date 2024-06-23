@@ -148,14 +148,22 @@
               "devServerTarget": "my-pokemans:serve:production"
             }
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
     "schematicCollections": [
-      "@cypress/schematic",
-      "@schematics/angular"
+      "@angular-eslint/schematics"
     ]
   }
 }
