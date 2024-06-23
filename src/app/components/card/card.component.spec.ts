@@ -2,16 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardComponent } from './card.component';
 import { HttpClientModule } from '@angular/common/http';
-import { PokemonService } from 'src/app/services/pokemon.service';
 import { of } from 'rxjs';
+import { PokemonService } from '../../services/pokemon.service';
 
 describe('CardComponent', () => {
   let component: CardComponent;
   let fixture: ComponentFixture<CardComponent>;
-  let mockPokemonService: jasmine.SpyObj<PokemonService>;
+  let mockPokemonService: jest.Mocked<PokemonService>;
 
   beforeEach(async () => {
-    mockPokemonService = jasmine.createSpyObj('PokemonService', ['getPokemon']);
+    mockPokemonService = {
+      getPokemon: jest.fn()
+    } as unknown as jest.Mocked<PokemonService>;
     await TestBed.configureTestingModule({
       declarations: [ CardComponent ],
       imports: [HttpClientModule],
@@ -29,7 +31,7 @@ describe('CardComponent', () => {
 
   it('should set imgUrl and types on ngOnInit', () => {
     const mockPokemon = { id: 1, sprites: { front_default: 'url' }, types: ['grass', 'poison'] };
-    mockPokemonService.getPokemon.and.returnValue(of(mockPokemon));
+    mockPokemonService.getPokemon.mockReturnValue(of(mockPokemon));
 
     component.pokemon = { id: 1 } as any; // provide a dummy Pokemon object
 
