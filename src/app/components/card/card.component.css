@@ -1,0 +1,14 @@
+.card {
+  width: 20pc;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card-img-top {
+  align-self: center;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
+.card-body span + span span.type {
+  margin-left: 1em;
+}/*# sourceMappingURL=card.component.css.map */
