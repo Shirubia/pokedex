@@ -1,15 +1,16 @@
-<div class="container my-5">
-  <h1>My Pokédex</h1>
-  <hr />
+<div class="container mx-auto my-5 p-2 xl:p-0 space-y-8">
+  <h1 class="mb-2 text-center text-5xl md:text-6xl font-bold">My Pokédex</h1>
   <input
     type="text"
-    class="form-control"
+    class="max-w-lg mx-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     placeholder="Search your pokémon..."
     (input)="filter($event)"
   />
 
-  <div class="row">
-    <div class="col-xl-4 col-sm-6 col-xs-12" *ngFor="let pokemon of pokemons">
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4"
+  >
+    <div class="col-span-1" *ngFor="let pokemon of pokemons">
       <app-card [pokemon]="pokemon"></app-card>
     </div>
   </div>
