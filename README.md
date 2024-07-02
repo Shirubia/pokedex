@@ -1,6 +1,6 @@
 # Pokédex
 
-Simple Angular Pokédex project using https://pokeapi.co
+Simple Angular Pokédex project consuming data from [PokéAPI](https://pokeapi.co) and using [Tailwind CSS](https://tailwindcss.com) for styling.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
 
