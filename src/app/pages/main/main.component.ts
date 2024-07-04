@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { take } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { debounceTime, Subject, take, takeUntil } from 'rxjs';
 import { Pokemon } from '../../models/pokemon';
 import { PokemonService } from '../../services/pokemon.service';
 
@@ -8,17 +8,19 @@ import { PokemonService } from '../../services/pokemon.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit {
+export class MainComponent implements OnInit, OnDestroy {
   isLoading = true;
   pokemons: Pokemon[] | undefined;
   pokemonsCopy: Pokemon[] | undefined;
+  searchSubject: Subject<string> = new Subject();
+  private readonly destroy$: Subject<void> = new Subject();
 
   constructor(private readonly pokeService: PokemonService) {}
 
   ngOnInit(): void {
     this.pokeService
       .getPokemons()
-      .pipe(take(1))
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (pokemons: any) => {
           this.pokemons = pokemons.results.map(
@@ -32,14 +34,26 @@ export class MainComponent implements OnInit {
         error: (error) => {
           console.error('Error loading Pokémon list!', error);
           this.isLoading = false;
-        }
+        },
       });
+    this.searchSubject.pipe(takeUntil(this.destroy$)).subscribe((search) => {
+      if (search.length >= 2) {
+        this.pokemons = this.pokemonsCopy?.filter(({ name }: Pokemon) => {
+          return name.toLowerCase().includes(search);
+        });
+      } else {
+        this.pokemons = this.pokemonsCopy;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   filter(event: any): void {
-    const search: string = event.target.value;
-    this.pokemons = this.pokemonsCopy?.filter(({ name }: Pokemon) => {
-      return name.toLowerCase().includes(search.toLowerCase());
-    });
+    const search: string = event.target.value.trim().toLowerCase();
+    this.searchSubject.next(search);
   }
 }
