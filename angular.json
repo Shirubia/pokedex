@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "my-pokemans": {
+    "pokedex": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/my-pokemans",
+            "outputPath": "dist/pokedex",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -71,10 +71,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-pokemans:build:production"
+              "buildTarget": "pokedex:build:production"
             },
             "development": {
-              "buildTarget": "my-pokemans:build:development"
+              "buildTarget": "pokedex:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "my-pokemans:build"
+            "buildTarget": "pokedex:build"
           }
         },
         "test": {
@@ -107,11 +107,11 @@
         "cypress-run": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "my-pokemans:serve"
+            "devServerTarget": "pokedex:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "my-pokemans:serve:production"
+              "devServerTarget": "pokedex:serve:production"
             }
           }
         },
@@ -125,27 +125,27 @@
         "ct": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "my-pokemans:serve",
+            "devServerTarget": "pokedex:serve",
             "watch": true,
             "headless": false,
             "testingType": "component"
           },
           "configurations": {
             "development": {
-              "devServerTarget": "my-pokemans:serve:development"
+              "devServerTarget": "pokedex:serve:development"
             }
           }
         },
         "e2e": {
           "builder": "@cypress/schematic:cypress",
           "options": {
-            "devServerTarget": "my-pokemans:serve",
+            "devServerTarget": "pokedex:serve",
             "watch": true,
             "headless": false
           },
           "configurations": {
             "production": {
-              "devServerTarget": "my-pokemans:serve:production"
+              "devServerTarget": "pokedex:serve:production"
             }
           }
         },
@@ -163,7 +163,7 @@
   },
   "cli": {
     "schematicCollections": [
-      "@angular-eslint/schematics"
+      "@schematics/angular"
     ]
   }
 }
