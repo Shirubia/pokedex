@@ -3,6 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'typeClass',
   standalone: true,
+  pure: true
 })
 export class TypeClassPipe implements PipeTransform {
   private typeClasses: { [key: string]: string } = {
