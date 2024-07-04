@@ -9,21 +9,30 @@ import { PokemonService } from '../../services/pokemon.service';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
+  isLoading = true;
   pokemons: Pokemon[] | undefined;
   pokemonsCopy: Pokemon[] | undefined;
+
   constructor(private readonly pokeService: PokemonService) {}
 
   ngOnInit(): void {
     this.pokeService
       .getPokemons()
       .pipe(take(1))
-      .subscribe((pokemons: any) => {
-        this.pokemons = pokemons.results.map(
-          ({ name, url }: Pokemon, index: number) => {
-            return { id: index + 1, name: name, url: url };
-          }
-        );
-        this.pokemonsCopy = this.pokemons;
+      .subscribe({
+        next: (pokemons: any) => {
+          this.pokemons = pokemons.results.map(
+            ({ name, url }: Pokemon, index: number) => {
+              return { id: index + 1, name: name, url: url };
+            }
+          );
+          this.pokemonsCopy = this.pokemons;
+          this.isLoading = false;
+        },
+        error: (error) => {
+          console.error('Error loading Pokémon list!', error);
+          this.isLoading = false;
+        }
       });
   }
 

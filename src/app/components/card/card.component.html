@@ -6,11 +6,12 @@
     src="{{ imgUrl }}"
     alt="
   {{ pokemon.name | titlecase }}"
+    loading="lazy"
   />
   <div class="p-2">
     <h5 class="mb-3 text-2xl font-bold flex items-center">
       <span
-        class="rounded-xl px-2 py-0.5 text-sm font-medium ring-1 ring-inset mr-2 w-[6ch]"
+        class="rounded-xl px-2 py-0.5 text-sm text-center font-medium ring-1 ring-inset mr-2 w-[7ch]"
         >#{{ pokemon.id }}</span
       >
       {{ pokemon.name | titlecase }}
