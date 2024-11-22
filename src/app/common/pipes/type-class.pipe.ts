@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   pure: true,
 })
 export class TypeClassPipe implements PipeTransform {
-  private typeClasses: { [key: string]: string } = {
+  private typeClasses: Record<string, string> = {
     normal:
       'bg-neutral-50 text-neutral-600 ring-neutral-500/10 dark:bg-neutral-800 dark:text-neutral-300 dark:ring-neutral-400/10',
     fire: 'bg-orange-50 text-orange-700 ring-orange-700/10 dark:bg-orange-900 dark:text-orange-300 dark:ring-orange-500/10',

@@ -12,8 +12,8 @@ export class MainComponent implements OnInit, OnDestroy {
   isLoading = true;
   pokemons: Pokemon[] | undefined;
   pokemonsCopy: Pokemon[] | undefined;
-  searchSubject: Subject<string> = new Subject();
-  private readonly destroy$: Subject<void> = new Subject();
+  searchSubject = new Subject<string>();
+  private readonly destroy$ = new Subject<void>();
 
   constructor(private readonly pokeService: PokemonService) {}
 
