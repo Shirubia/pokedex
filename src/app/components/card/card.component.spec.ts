@@ -4,6 +4,7 @@ import { CardComponent } from './card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { of } from 'rxjs';
 import { PokemonService } from '../../services/pokemon.service';
+import { Pokemon } from '../../models/pokemon';
 
 describe('CardComponent', () => {
   let component: CardComponent;
@@ -12,14 +13,13 @@ describe('CardComponent', () => {
 
   beforeEach(async () => {
     mockPokemonService = {
-      getPokemon: jest.fn()
+      getPokemon: jest.fn(),
     } as unknown as jest.Mocked<PokemonService>;
     await TestBed.configureTestingModule({
-      declarations: [ CardComponent ],
+      declarations: [CardComponent],
       imports: [HttpClientModule],
-      providers: [{ provide: PokemonService, useValue: mockPokemonService }]
-    })
-    .compileComponents();
+      providers: [{ provide: PokemonService, useValue: mockPokemonService }],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
@@ -30,10 +30,16 @@ describe('CardComponent', () => {
   });
 
   it('should set imgUrl and types on ngOnInit', () => {
-    const mockPokemon = { id: 1, sprites: { front_default: 'url' }, types: ['grass', 'poison'] };
+    const mockPokemon = {
+      id: 1,
+      name: 'name',
+      url: 'url',
+      sprites: { front_default: 'url' },
+      types: ['grass', 'poison'],
+    };
     mockPokemonService.getPokemon.mockReturnValue(of(mockPokemon));
 
-    component.pokemon = { id: 1 } as any; // provide a dummy Pokemon object
+    component.pokemon = { id: 1 } as Pokemon; // provide a dummy Pokemon object
 
     component.ngOnInit();
 
