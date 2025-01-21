@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { debounceTime, Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Pokemon } from '../../models/pokemon';
 import { PokemonService } from '../../services/pokemon.service';
 
@@ -26,7 +26,7 @@ export class MainComponent implements OnInit, OnDestroy {
           this.pokemons = pokemons.results.map(
             ({ name, url }: Pokemon, index: number) => {
               return { id: index + 1, name: name, url: url };
-            }
+            },
           );
           this.pokemonsCopy = this.pokemons;
           this.isLoading = false;
