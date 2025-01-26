@@ -3,7 +3,7 @@
 >
   <img
     class="self-center max-w-fit"
-    src="{{ imgUrl }}"
+    src="{{ pokemon.sprites?.front_default }}"
     alt="
   {{ pokemon.name | titlecase }}"
     loading="lazy"
@@ -17,7 +17,7 @@
       {{ pokemon.name | titlecase }}
     </h5>
     <div class="flex space-x-1">
-      <span *ngFor="let type of types">
+      <span *ngFor="let type of pokemon.types">
         <span
           class="inline-flex items-center rounded-xl px-2 py-0.5 text-xs font-medium ring-1 ring-inset"
           [ngClass]="type.type.name | typeClass"
