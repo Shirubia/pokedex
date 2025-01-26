@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './pages/main/main.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TypeClassPipe } from './shared/pipes/type-class.pipe';
 import { CardComponent } from './components/card/card.component';
-import { TypeClassPipe } from './common/pipes/type-class.pipe';
 
 @NgModule({
   declarations: [AppComponent, MainComponent, CardComponent],

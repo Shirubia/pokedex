@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { Pokemon } from '../../models/pokemon';
-import { PokemonService } from '../../services/pokemon.service';
+import { Pokemon } from '../../shared/models/pokemon.model';
+import { PokemonService } from '../../shared/services/pokemon.service';
 
 @Component({
   selector: 'app-main',
