@@ -36,9 +36,37 @@
 
   <div
     class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 hyphens-auto"
+    *ngIf="!isLoading && pokemons.length > 0"
   >
     <div class="col-span-1" *ngFor="let pokemon of pokemons">
       <app-card [pokemon]="pokemon"></app-card>
     </div>
+  </div>
+
+  <div *ngIf="!isLoading && pokemons.length === 0" class="text-center">
+    <p>No Pokémon found!</p>
+  </div>
+
+  <div
+    class="flex justify-center items-center space-x-4 mt-6"
+    *ngIf="!isLoading && totalPages > 1"
+  >
+    <button
+      class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+      [disabled]="currentPage === 1"
+      (click)="goToPage(currentPage - 1)"
+    >
+      Previous
+    </button>
+    <span class="text-lg font-medium"
+      >Page {{ currentPage }} of {{ totalPages }}</span
+    >
+    <button
+      class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
+      [disabled]="currentPage === totalPages"
+      (click)="goToPage(currentPage + 1)"
+    >
+      Next
+    </button>
   </div>
 </div>

@@ -47,3 +47,11 @@ export interface PokemonType {
     url?: string;
   };
 }
+
+// Define a response type for the Pokémon list API
+export interface PokemonListResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Pokemon[];
+}
