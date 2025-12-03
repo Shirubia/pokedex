@@ -1,29 +1,31 @@
 <div
   class="flex max-w-lg p-6 lg:space-x-6 border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
->
+  >
   <img
     class="self-center max-w-fit"
     src="{{ pokemon.sprites?.front_default }}"
     alt="
   {{ pokemon.name | titlecase }}"
     loading="lazy"
-  />
+    />
   <div class="p-2">
     <h5 class="mb-3 text-2xl font-bold flex items-center">
       <span
         class="rounded-xl px-2 py-0.5 text-sm text-center font-medium ring-1 ring-inset mr-2 w-[7ch]"
         >#{{ pokemon.id }}</span
-      >
-      {{ pokemon.name | titlecase }}
-    </h5>
-    <div class="flex space-x-1">
-      <span *ngFor="let type of pokemon.types">
-        <span
-          class="inline-flex items-center rounded-xl px-2 py-0.5 text-xs font-medium ring-1 ring-inset"
-          [ngClass]="type.type.name | typeClass"
-          >{{ type.type.name }}</span
         >
-      </span>
+        {{ pokemon.name | titlecase }}
+      </h5>
+      <div class="flex space-x-1">
+        @for (type of pokemon.types; track type) {
+          <span>
+            <span
+              class="inline-flex items-center rounded-xl px-2 py-0.5 text-xs font-medium ring-1 ring-inset"
+              [ngClass]="type.type.name | typeClass"
+              >{{ type.type.name }}</span
+              >
+            </span>
+          }
+        </div>
+      </div>
     </div>
-  </div>
-</div>

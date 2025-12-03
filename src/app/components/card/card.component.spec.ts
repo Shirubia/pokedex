@@ -1,7 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardComponent } from './card.component';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 import { PokemonService } from '../../shared/services/pokemon.service';
 import { Pokemon, PokemonTypeName } from '../../shared/models/pokemon.model';
@@ -31,9 +34,11 @@ describe('CardComponent', () => {
       getPokemon: jest.fn(),
     } as unknown as jest.Mocked<PokemonService>;
     await TestBed.configureTestingModule({
-      declarations: [CardComponent],
-      imports: [HttpClientModule, TypeClassPipe],
-      providers: [{ provide: PokemonService, useValue: mockPokemonService }],
+      imports: [TypeClassPipe, CardComponent],
+      providers: [
+        { provide: PokemonService, useValue: mockPokemonService },
+        provideHttpClient(withInterceptorsFromDi()),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardComponent);

@@ -2,9 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Pokemon } from '../../shared/models/pokemon.model';
 import { PokemonService } from '../../shared/services/pokemon.service';
+import { CardComponent } from '../../components/card/card.component';
 
 @Component({
   selector: 'app-main',
+  imports: [CardComponent],
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })

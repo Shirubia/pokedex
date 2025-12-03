@@ -2,9 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { Pokemon } from '../../shared/models/pokemon.model';
 import { PokemonService } from '../../shared/services/pokemon.service';
+import { CommonModule, TitleCasePipe } from '@angular/common';
+import { TypeClassPipe } from '../../shared/pipes/type-class.pipe';
 
 @Component({
   selector: 'app-card',
+  imports: [CommonModule, TitleCasePipe, TypeClassPipe],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
