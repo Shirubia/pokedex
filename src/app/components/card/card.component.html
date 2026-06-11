@@ -17,7 +17,7 @@
         {{ pokemon.name | titlecase }}
       </h5>
       <div class="flex space-x-1">
-        @for (type of pokemon.types; track type) {
+        @for (type of pokemon.types; track type.type.name) {
           <span>
             <span
               class="inline-flex items-center rounded-xl px-2 py-0.5 text-xs font-medium ring-1 ring-inset"
