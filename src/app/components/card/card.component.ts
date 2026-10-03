@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { Pokemon } from '../../shared/models/pokemon.model';
 import { PokemonService } from '../../shared/services/pokemon.service';
@@ -12,9 +12,9 @@ import { TypeClassPipe } from '../../shared/pipes/type-class.pipe';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  @Input() pokemon!: Pokemon;
+  private readonly pokeService = inject(PokemonService);
 
-  constructor(private readonly pokeService: PokemonService) {}
+  @Input() pokemon!: Pokemon;
 
   ngOnInit(): void {
     if (!this.pokemon.id) {

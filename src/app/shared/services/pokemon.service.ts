@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Pokemon } from '../models/pokemon.model';
@@ -8,7 +8,8 @@ import { environment } from '../../../environments/environment.development';
   providedIn: 'root',
 })
 export class PokemonService {
-  constructor(private readonly http: HttpClient) {}
+  private readonly http = inject(HttpClient);
+
 
   getPokemons(): Observable<Pokemon> {
     return this.http.get<Pokemon>(environment.apiUrl + '/pokemon?limit=1025');

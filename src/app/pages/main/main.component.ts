@@ -1,8 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Pokemon } from '../../shared/models/pokemon.model';
 import { PokemonService } from '../../shared/services/pokemon.service';
 import { CardComponent } from '../../components/card/card.component';
+
+interface PokemonListResponse {
+  results: Pick<Pokemon, 'name' | 'url'>[];
+}
 
 @Component({
   selector: 'app-main',
@@ -11,23 +15,23 @@ import { CardComponent } from '../../components/card/card.component';
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit, OnDestroy {
+  private readonly pokeService = inject(PokemonService);
+
   isLoading = true;
-  pokemons: Pokemon[] | undefined;
-  pokemonsCopy: Pokemon[] | undefined;
+  pokemons: Pokemon[] = [];
+  pokemonsCopy: Pokemon[] = [];
   searchSubject = new Subject<string>();
   private readonly destroy$ = new Subject<void>();
-
-  constructor(private readonly pokeService: PokemonService) {}
 
   ngOnInit(): void {
     this.pokeService
       .getPokemons()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (pokemons: any) => {
+        next: (pokemons: PokemonListResponse) => {
           this.pokemons = pokemons.results.map(
-            ({ name, url }: Pokemon, index: number) => {
-              return { id: index + 1, name: name, url: url };
+            ({ name, url }, index: number) => {
+              return { id: index + 1, name, url };
             },
           );
           this.pokemonsCopy = this.pokemons;
@@ -40,7 +44,7 @@ export class MainComponent implements OnInit, OnDestroy {
       });
     this.searchSubject.pipe(takeUntil(this.destroy$)).subscribe((search) => {
       if (search.length >= 2) {
-        this.pokemons = this.pokemonsCopy?.filter(({ name }: Pokemon) => {
+        this.pokemons = this.pokemonsCopy.filter(({ name }) => {
           return name.toLowerCase().includes(search);
         });
       } else {
@@ -54,8 +58,9 @@ export class MainComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  filter(event: any): void {
-    const search: string = event.target.value.trim().toLowerCase();
+  filter(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+    const search = (target?.value ?? '').trim().toLowerCase();
     this.searchSubject.next(search);
   }
 }
