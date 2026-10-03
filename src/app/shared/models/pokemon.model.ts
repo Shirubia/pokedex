@@ -30,6 +30,10 @@ export interface Pokemon {
   order?: number;
 }
 
+export interface PokemonListResponse {
+  results: Pick<Pokemon, 'name' | 'url'>[];
+}
+
 export interface PokemonSprites {
   front_default?: string;
   front_shiny?: string;

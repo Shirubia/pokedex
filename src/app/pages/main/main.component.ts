@@ -1,12 +1,8 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { Pokemon } from '../../shared/models/pokemon.model';
+import { Pokemon, PokemonListResponse } from '../../shared/models/pokemon.model';
 import { PokemonService } from '../../shared/services/pokemon.service';
 import { CardComponent } from '../../components/card/card.component';
-
-interface PokemonListResponse {
-  results: Pick<Pokemon, 'name' | 'url'>[];
-}
 
 @Component({
   selector: 'app-main',
