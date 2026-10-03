@@ -4,7 +4,7 @@
     "outDir": "./out-tsc/spec",
     "types": ["jest", "node"],
     "module": "ESNext",
-    "moduleResolution": "node"
+    "moduleResolution": "bundler"
   },
   "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }
